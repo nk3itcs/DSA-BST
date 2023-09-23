@@ -1,0 +1,18 @@
+class Solution {
+    private:
+        TreeNode *constructBST(vector<int> preorder,int &st,int end,int uBound){
+           if(st>end || preorder[st]>uBound)
+                return NULL;
+            TreeNode *root=new TreeNode(preorder[st++]);
+            root->left=constructBST(preorder,st,end,root->val);
+            root->right=constructBST(preorder,st,end,uBound);
+            return root;
+
+
+        }
+public:
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int st=0,end=preorder.size()-1;
+        return constructBST(preorder,st,end,INT_MAX);
+    }
+};
